@@ -121,6 +121,10 @@ export interface CustomPickerProps {
    */
   placeholder?: string
 
+  canShowOptions?: boolean
+
+  keepShowing?: boolean
+
   /**
    * Modal animation type.
    */

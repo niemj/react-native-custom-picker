@@ -29,7 +29,9 @@ export class CustomPicker extends React.PureComponent<
     fieldTemplate: defaultFieldTemplate,
     optionTemplate: defaultOptionTemplate,
     placeholder: 'Pick an item...',
-    modalAnimationType: 'none'
+    modalAnimationType: 'none',
+    canShowOptions: true,
+    keepShowing: false,
   }
 
   constructor(props: CustomPickerProps) {
@@ -55,6 +57,8 @@ export class CustomPicker extends React.PureComponent<
       fieldTemplate,
       optionTemplate,
       placeholder,
+      canShowOptions,
+      keepShowing,
       options,
       headerTemplate,
       footerTemplate,
@@ -169,7 +173,7 @@ export class CustomPicker extends React.PureComponent<
    * Show modal picker to display options.
    */
   showOptions() {
-    if (this.state.modalVisible) {
+    if (this.state.modalVisible||!this.props.canShowOptions) {
       return
     }
     this.setState({ modalVisible: true }, this.props.onFocus)
@@ -179,7 +183,7 @@ export class CustomPicker extends React.PureComponent<
    * Hide options by hiding modal picker.
    */
   hideOptions() {
-    if (!this.state.modalVisible) {
+    if (!this.state.modalVisible||this.props.keepShowing) {
       return
     }
     this.setState({ modalVisible: false }, this.props.onBlur)
